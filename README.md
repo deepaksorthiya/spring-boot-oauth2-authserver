@@ -2,7 +2,7 @@
 ##  **Spring Boot 3 Basic Authorization Server Demo **
 ## Requirements:
 ```
-Spring Boot: 3.3.4
+Spring Boot: 3.3.5
 Maven: 3.9+
 Java: 17
 ```
