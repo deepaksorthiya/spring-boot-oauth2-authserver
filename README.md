@@ -7,9 +7,9 @@
 ## Requirements:
 
 ```
-Spring Boot: 3.4.1
+Spring Boot: 3.5.0
 Maven: 3.9+
-Java: 17
+Java: 21
 ```
 
 ### Clone this repository:
