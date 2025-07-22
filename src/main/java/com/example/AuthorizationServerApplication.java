@@ -6,10 +6,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 @SpringBootApplication
 @EnableWebSecurity(/*debug = true*/)
-public class SpringBoot3AuthorizationServerApplication {
+public class AuthorizationServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBoot3AuthorizationServerApplication.class, args);
+        SpringApplication.run(AuthorizationServerApplication.class, args);
     }
 
 }
