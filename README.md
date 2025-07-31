@@ -1,8 +1,8 @@
-[![Java CI with Maven](https://github.com/deepaksorthiya/spring-boot-3-oauth2-authserver/actions/workflows/maven-build.yml/badge.svg)](https://github.com/deepaksorthiya/spring-boot-3-oauth2-authserver/actions/workflows/maven.yml)
+[![Java CI with Maven](https://github.com/deepaksorthiya/spring-boot-oauth2-authserver/actions/workflows/maven-build.yml/badge.svg)](https://github.com/deepaksorthiya/spring-boot-oauth2-authserver/actions/workflows/maven.yml)
 
 # Getting Started
 
-## **Spring Boot 3 Basic Authorization Server Demo **
+## **Spring Boot Basic Authorization Server Demo **
 
 ## Requirements:
 
@@ -15,8 +15,8 @@ Java: 24
 ### Clone this repository:
 
 ```bash
-git clone https://github.com/deepaksorthiya/spring-boot-3-oauth2-authserver.git
-cd spring-boot-3-oauth2-authserver
+git clone https://github.com/deepaksorthiya/spring-boot-oauth2-authserver.git
+cd spring-boot-oauth2-authserver
 ```
 
 ### Start Spring Boot Service:

@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>spring-boot-3-oauth2-authserver</artifactId>
+    <artifactId>spring-boot-oauth2-authserver</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-3-oauth2-authserver</name>
-    <description>Spring Boot 3 OAuth2 Authorization Server</description>
+    <name>spring-boot-oauth2-authserver</name>
+    <description>Spring Boot OAuth2 Authorization Server</description>
     <url/>
     <licenses>
         <license/>
