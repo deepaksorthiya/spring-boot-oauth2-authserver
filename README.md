@@ -12,10 +12,6 @@
   </a>
 </p>
 
-# Getting Started
-
-## **Spring Boot Basic Authorization Server Demo **
-
 ## Requirements:
 
 ```
