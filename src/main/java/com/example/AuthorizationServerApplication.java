@@ -6,6 +6,10 @@ import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportRuntimeHints;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.core.oidc.DefaultAddressStandardClaim;
+import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 
 @SpringBootApplication
@@ -27,7 +31,11 @@ public class AuthorizationServerApplication {
         @Override
         public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
             hints.reflection()
-                    .registerType(WebAuthenticationDetails.class, MemberCategory.values());
+                    .registerType(WebAuthenticationDetails.class, MemberCategory.values())
+                    .registerType(OidcUserInfo.class, MemberCategory.values())
+                    .registerType(DefaultAddressStandardClaim.class, MemberCategory.values())
+                    .registerType(SimpleGrantedAuthority.class, MemberCategory.values())
+                    .registerType(Jwt.class, MemberCategory.values());
         }
 
     }
