@@ -1,8 +1,16 @@
-[![Java CI with Maven](https://github.com/deepaksorthiya/spring-boot-oauth2-authserver/actions/workflows/maven-build.yml/badge.svg)](https://github.com/deepaksorthiya/spring-boot-oauth2-authserver/actions/workflows/maven.yml)
+<h1 style="text-align: center;">Spring Boot Authorization Server Project</h1>
 
-# Getting Started
-
-## **Spring Boot Basic Authorization Server Demo **
+<p style="text-align: center;">
+  <a href="https://github.com/deepaksorthiya/spring-boot-oauth2-authserver/workflows/maven-build.yml">
+    <img src="https://github.com/deepaksorthiya/spring-boot-oauth2-authserver/actions/workflows/maven-build.yml/badge.svg" alt="Java Maven Build Test"/>
+  </a>
+  <a href="https://hub.docker.com/r/deepaksorthiya/spring-boot-oauth2-authserver">
+    <img src="https://img.shields.io/docker/pulls/deepaksorthiya/spring-boot-oauth2-authserver" alt="Docker"/>
+  </a>
+  <a href="https://spring.io/projects/spring-boot">
+    <img src="https://img.shields.io/badge/spring--boot-3.5.0-brightgreen?logo=springboot" alt="Spring Boot"/>
+  </a>
+</p>
 
 ## Requirements:
 
