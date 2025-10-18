@@ -9,11 +9,7 @@ import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,7 +17,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
-import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationToken;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
@@ -45,16 +40,7 @@ public class WebSecurityConfig {
             .with(authorizationServerConfigurer, (authorizationServer) ->
                 authorizationServer
                         // Enable OpenID Connect 1.0
-                        .oidc(oidc -> oidc.userInfoEndpoint(userInfo -> userInfo.userInfoResponseHandler((_, response, authentication) -> {
-                            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                            response.setStatus(HttpStatus.OK.value());
-                            OidcUserInfoAuthenticationToken userInfoAuthenticationToken = (OidcUserInfoAuthenticationToken) authentication;
-                            LOGGER.info("OIDC UserInfoAuthenticationToken = {}", userInfoAuthenticationToken);
-
-                            HttpMessageConverter<Object> converter = new MappingJackson2HttpMessageConverter();
-                            converter.write(userInfoAuthenticationToken.getUserInfo(), MediaType.APPLICATION_JSON,
-                                    new ServletServerHttpResponse(response));
-                        })))
+                        .oidc(Customizer.withDefaults())
             )
             .authorizeHttpRequests((authorize) ->
                 authorize
