@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -36,24 +37,43 @@ public class WebSecurityConfig {
                 OAuth2AuthorizationServerConfigurer.authorizationServer();
         // @formatter:off
         http
-            .securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
-            .with(authorizationServerConfigurer, (authorizationServer) ->
-                authorizationServer
-                        // Enable OpenID Connect 1.0
-                        .oidc(Customizer.withDefaults())
-            )
-            .authorizeHttpRequests((authorize) ->
-                authorize
-                    .anyRequest().authenticated()
-            )
-            // Redirect to the login page when not authenticated from the
-            // authorization endpoint
-            .exceptionHandling((exceptions) -> exceptions
-                .defaultAuthenticationEntryPointFor(
-                        new LoginUrlAuthenticationEntryPoint("/login"),
-                        new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
+                .securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
+                .with(authorizationServerConfigurer, (authorizationServer) ->
+                        authorizationServer
+                                .authorizationServerMetadataEndpoint(oAuth2AuthorizationServerMetadataEndpointConfigurer -> oAuth2AuthorizationServerMetadataEndpointConfigurer
+                                        .authorizationServerMetadataCustomizer(builder -> builder.scopes(strings -> {
+                                            strings.add(OidcScopes.OPENID);
+                                            strings.add(OidcScopes.PROFILE);
+                                            strings.add(OidcScopes.EMAIL);
+                                            strings.add(OidcScopes.ADDRESS);
+                                            strings.add(OidcScopes.PHONE);
+                                        })))
+                                // Enable OpenID Connect 1.0 and add supported scope to config endpoint
+                                .oidc(oidc ->
+                                        oidc
+                                                .providerConfigurationEndpoint(providerConfigurationEndpoint ->
+                                                        providerConfigurationEndpoint
+                                                                .providerConfigurationCustomizer(builder -> builder.scopes(strings -> {
+                                                                    strings.add(OidcScopes.PROFILE);
+                                                                    strings.add(OidcScopes.EMAIL);
+                                                                    strings.add(OidcScopes.ADDRESS);
+                                                                    strings.add(OidcScopes.PHONE);
+                                                                }))
+                                                )
+                                )
                 )
-            );
+                .authorizeHttpRequests((authorize) ->
+                        authorize
+                                .anyRequest().authenticated()
+                )
+                // Redirect to the login page when not authenticated from the
+                // authorization endpoint
+                .exceptionHandling((exceptions) -> exceptions
+                        .defaultAuthenticationEntryPointFor(
+                                new LoginUrlAuthenticationEntryPoint("/login"),
+                                new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
+                        )
+                );
         // @formatter:on
         return http.build();
     }
