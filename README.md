@@ -8,14 +8,14 @@
     <img src="https://img.shields.io/docker/pulls/deepaksorthiya/spring-boot-oauth2-authserver" alt="Docker"/>
   </a>
   <a href="https://spring.io/projects/spring-boot">
-    <img src="https://img.shields.io/badge/spring--boot-3.5.7-brightgreen?logo=springboot" alt="Spring Boot"/>
+    <img src="https://img.shields.io/badge/spring--boot-3.5.8-brightgreen?logo=springboot" alt="Spring Boot"/>
   </a>
 </p>
 
 ## Requirements:
 
 ```
-Spring Boot: 3.5.7
+Spring Boot: 3.5.8
 Maven: 3.9+
 Java: 25
 ```

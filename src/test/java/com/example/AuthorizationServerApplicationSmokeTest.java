@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 @SpringBootTest
-class AuthorizationServerApplicationTest {
+class AuthorizationServerApplicationSmokeTest {
 
-    // Unit Test: Application context loads
+    // Unit Test: check if Application context successfully loads
     @Autowired
     ApplicationContext applicationContext;
 
