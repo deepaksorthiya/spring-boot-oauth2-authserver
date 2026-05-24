@@ -20,6 +20,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
+import org.springframework.security.oauth2.server.authorization.InMemoryOAuth2AuthorizationConsentService;
+import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -31,6 +33,7 @@ import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 public class WebSecurityConfig {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(WebSecurityConfig.class);
+    private static final String CUSTOM_CONSENT_PAGE_URI = "/oauth2/consent";
 
     @Bean
     @Order(1)
@@ -43,6 +46,8 @@ public class WebSecurityConfig {
                 .securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
                 .with(authorizationServerConfigurer, (authorizationServer) ->
                         authorizationServer
+                                .authorizationEndpoint(authorizationEndpoint ->
+                                        authorizationEndpoint.consentPage(CUSTOM_CONSENT_PAGE_URI))
                                 .authorizationServerMetadataEndpoint(oAuth2AuthorizationServerMetadataEndpointConfigurer -> oAuth2AuthorizationServerMetadataEndpointConfigurer
                                         .authorizationServerMetadataCustomizer(builder -> builder.scopes(strings -> {
                                             strings.add(OidcScopes.OPENID);
@@ -119,6 +124,12 @@ public class WebSecurityConfig {
     @Bean
     public AuditEventRepository auditEventRepository() {
         return new InMemoryAuditEventRepository();
+    }
+
+    @Bean
+    public OAuth2AuthorizationConsentService authorizationConsentService() {
+        // Will be used by the ConsentController
+        return new InMemoryOAuth2AuthorizationConsentService();
     }
 
 }
