@@ -15,7 +15,7 @@
 ## Requirements:
 
 ```
-Spring Boot: 3.5.11
+Spring Boot: 3.5.15
 Maven: 3.9+
 Java: 25
 ```
